@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class PostsTableSeeder extends Seeder
+class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,9 @@ class PostsTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $this->call([
+            UsersTableSeeder::class,
+            PostsTableSeeder::class,
+        ]);
     }
 }
