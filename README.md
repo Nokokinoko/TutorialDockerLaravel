@@ -9,3 +9,6 @@ use Laradock
 example@example.jp / foobar  
 example@example.en / foobar  
 [3-20] random / password
+
+## Note
+skip setting mailer
