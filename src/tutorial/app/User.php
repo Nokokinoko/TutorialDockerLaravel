@@ -3,13 +3,15 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail as MustVerifyEmailContract;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\Notifications\CustomPasswordReset;
+use App\Notifications\CustomVerifyEmail;
+use Illuminate\Auth\MustVerifyEmail;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmailContract
 {
-    use Notifiable;
+    use MustVerifyEmail, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -57,5 +59,15 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify( new CustomPasswordReset( $token ) );
+    }
+    
+    /**
+     * Notification verify email
+     *
+     * @return void
+     */
+    public function sendEmailVerificationNotification()
+    {
+        $this->notify( new CustomVerifyEmail() );
     }
 }
