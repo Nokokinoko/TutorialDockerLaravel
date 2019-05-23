@@ -7,16 +7,20 @@
     <h1>{{ $title }}</h1>
 
     {{-- Edit, Delete --}}
-    <div>
-        <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
-            {{ __('Edit') }}
-        </a>
-        @component('components.btn-del')
-            @slot('controller', 'users')
-            @slot('id', $user->id)
-            @slot('name', $user->title)
-        @endcomponent
-    </div>
+    @if (Auth::check() && ! Auth::user()->isAdmin($user->id))
+        @can('edit', $user)
+            <div>
+                <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">
+                    {{ __('Edit') }}
+                </a>
+                @component('components.btn-del')
+                    @slot('controller', 'users')
+                    @slot('id', $user->id)
+                    @slot('name', $user->title)
+                @endcomponent
+            </div>
+        @endcan
+    @endif
 
     <dl class="row">
         <dt class="col-md-2">{{ __('ID') }}</dt>
@@ -38,7 +42,11 @@
                     <th>{{ __('Updated') }}</th>
 
                     {{-- Edit, Delete --}}
-                    <th></th>
+                    @auth
+                        @can('edit', $user)
+                            <th></th>
+                        @endcan
+                    @endauth
                 </tr>
             </thead>
             <tbody>
@@ -52,16 +60,20 @@
                         <td>{{ $post->body }}</td>
                         <td>{{ $post->created_at }}</td>
                         <td>{{ $post->updated_at }}</td>
-                        <td nowrap>
-                            <a href="{{ url('posts/' . $post->id . '/edit') }}" class="btn btn-primary">
-                                {{ __('Edit') }}
-                            </a>
-                            @component('components.btn-del')
-                                @slot('controller', 'posts')
-                                @slot('id', $post->id)
-                                @slot('name', $post->title)
-                            @endcomponent
-                        </td>
+                        @auth
+                            @can('edit', $user)
+                                <td nowrap>
+                                    <a href="{{ url('posts/' . $post->id . '/edit') }}" class="btn btn-primary">
+                                        {{ __('Edit') }}
+                                    </a>
+                                    @component('components.btn-del')
+                                        @slot('controller', 'posts')
+                                        @slot('id', $post->id)
+                                        @slot('name', $post->title)
+                                    @endcomponent
+                                </td>
+                            @endcan
+                        @endauth
                      </tr>
                 @endforeach
             </tbody>

@@ -7,16 +7,20 @@
     <h1 id="post-title">{{ $title }}</h1>
 
     {{-- Edit, Delete --}}
-    <div class="edit">
-        <a href="{{ url('posts/'.$post->id.'/edit') }}" class="btn btn-primary">
-            {{ __('Edit') }}
-        </a>
-        @component('components.btn-del')
-            @slot('controller', 'posts')
-            @slot('id', $post->id)
-            @slot('name', $post->title)
-        @endcomponent
-    </div>
+    @auth
+        @can('edit', $post)
+            <div class="edit">
+                <a href="{{ url('posts/'.$post->id.'/edit') }}" class="btn btn-primary">
+                    {{ __('Edit') }}
+                </a>
+                @component('components.btn-del')
+                    @slot('controller', 'posts')
+                    @slot('id', $post->id)
+                    @slot('name', $post->title)
+                @endcomponent
+            </div>
+        @endcan
+    @endauth
 
     <dl class="row">
         <dt class="col-md-2">{{ __('Author') }}:</dt>

@@ -41,6 +41,18 @@ class User extends Authenticatable implements MustVerifyEmailContract
     ];
     
     /**
+     * is Admin?
+     *
+     * @param number $id User ID
+     * @return bool
+     */
+    public function isAdmin($id=null)
+    {
+        $id = ($id) ? $id : $this->id;
+        return ( $id == config('admin_id') );
+    }
+    
+    /**
      * Relation
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
