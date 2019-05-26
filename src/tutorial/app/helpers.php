@@ -40,9 +40,9 @@ if( ! function_exists( 'my_locale_url' ) )
         $query = implode( '&', $paramsJoined );
         
         $url =
-            'http://'.$urlParsed['host']
+            $urlParsed['scheme'].'://'.$urlParsed['host']
             .( isset( $urlParsed['port'] ) ? ':'.$urlParsed['port'] : '' )
-            .( isset( $urlParsed['path'] ) ? $urlParsed['path'] : '' )
+            .( isset( $urlParsed['path'] ) ? $urlParsed['path'] : '/' )
             .'?'.$query
             .( isset( $urlParsed['fragment'] ) ? '#'.$urlParsed['fragment'] : '' )
         ;
