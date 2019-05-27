@@ -5,6 +5,10 @@ use Laradock
 - laravel: 5.7
 - mysql: 5.7
 
+# Reference 1
+https://qiita.com/sutara79/items/ef30fcdfb7afcb2188ea  
+to http://localhost/
+
 ## in Users table
 example@example.jp / foobar  
 example@example.en / foobar  
@@ -12,3 +16,11 @@ example@example.en / foobar
 
 ## Note
 skip setting mailer
+
+# Reference 2
+https://blog.hiroyuki90.com/articles/laravel-bbs/  
+to http://localhost/bbs/
+
+## Note
+posts table to bbs_posts table  
+comments table to bbs_comments table
