@@ -30,4 +30,11 @@ class BbsPostsController extends Controller
         
         return redirect()->route('bbs_top');
     }
+    
+    public function show($post_id)
+    {
+        $post = BbsPost::findOrFail($post_id);
+        
+        return view('bbs_posts.show', ['post' => $post]);
+    }
 }
