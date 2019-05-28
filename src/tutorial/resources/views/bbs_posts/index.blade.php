@@ -1,12 +1,14 @@
 @extends('layouts.bbs')
 @section('content')
     <div class="container mt-4">
+        {{-- Create --}}
         <div class="mb-4">
             <a href="{{ route('bbs_posts.create') }}" class="btn btn-primary">
                 投稿を新規作成する
             </a>
         </div>
         
+        {{-- Post --}}
         @foreach ($posts as $post)
             <div class="card mb-4">
                 <div class="card-header">
@@ -34,5 +36,10 @@
                 </div>
             </div>
         @endforeach
+        
+        {{-- Pagination --}}
+        <div class="d-flex justify-content-center mb-5">
+            {{ $posts->links() }}
+        </div>
     </div>
 @endsection

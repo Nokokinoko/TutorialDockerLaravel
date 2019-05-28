@@ -9,7 +9,7 @@ class BbsPostsController extends Controller
 {
     public function index()
     {
-        $posts = BbsPost::orderBy('created_at', 'desc')->get();
+        $posts = BbsPost::orderBy('created_at', 'desc')->paginate(10);
         
         return view('bbs_posts.index', ['posts' => $posts]);
     }
