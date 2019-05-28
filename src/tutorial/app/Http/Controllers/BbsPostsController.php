@@ -57,4 +57,16 @@ class BbsPostsController extends Controller
         
         return redirect()->route('bbs_posts.show', ['post' => $post]);
     }
+    
+    public function destroy($post_id)
+    {
+        $post = BbsPost::findOrFail($post_id);
+        
+        \DB::transaction(function () use ($post) {
+            $post->comments()->delete();
+            $post->delete();
+        });
+        
+        return redirect()->route('bbs_top');
+    }
 }

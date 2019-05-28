@@ -2,9 +2,20 @@
 @section('content')
     <div class="container mt-4">
         <div class="border p-4">
-            {{-- Edit --}}
             <div class="mb-4 text-right">
+                {{-- Edit --}}
                 <a class="btn btn-primary" href="{{ route('bbs_posts.edit', ['post' => $post]) }}">編集する</a>
+                
+                {{-- Delete --}}
+                <form
+                    style="display: inline-block;"
+                    method="POST"
+                    action="{{ route('bbs_posts.destroy', ['post' => $post]) }}"
+                >
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn btn-danger">削除する</button>
+                </form>
             </div>
             
             {{-- Title, Body --}}

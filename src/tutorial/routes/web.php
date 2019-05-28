@@ -22,5 +22,5 @@ Route::resource('users', 'UserController');
 Route::resource('posts', 'PostController');
 
 Route::get('bbs', 'BbsPostsController@index')->name('bbs_top');
-Route::resource('bbs_posts', 'BbsPostsController', ['only' => ['create', 'store', 'show', 'edit', 'update']]);
+Route::resource('bbs_posts', 'BbsPostsController', ['only' => ['create', 'store', 'show', 'edit', 'update', 'destroy']]);
 Route::resource('bbs_comments', 'BbsCommentsController', ['only' => ['store']]);
